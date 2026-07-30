@@ -20,6 +20,7 @@ theme:
   custom_dir: docs/overrides
   features:
     - navigation.tabs
+    - navigation.indexes
     - navigation.footer
     - navigation.tabs.sticky
     - content.code.copy

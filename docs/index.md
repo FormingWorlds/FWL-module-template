@@ -1,9 +1,3 @@
----
-title: ABASSI
-hide:
-  - navigation
----
-
 # ABASSI
 
 ABASSI is a volatile delivery and planetary accretion model designed for integration into
