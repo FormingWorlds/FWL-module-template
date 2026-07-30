@@ -1,0 +1,130 @@
+site_name: ABASSI
+site_url: https://proteus-framework.org/ABASSI
+repo_url: https://github.com/FormingWorlds/ABASSI
+
+copyright: '© 2023-2026 <a href="https://formingworlds.space">Forming Worlds Lab</a>'
+
+nav:
+  - Home: index.md
+
+  - Community:
+      - Contact: Community/contact.md
+      - Code of Conduct: Community/CODE_OF_CONDUCT.md
+      - Developers: https://proteus-framework.org/people
+
+  - Source code:
+      - GitHub repository: https://github.com/FormingWorlds/ABASSI
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - navigation.tabs.sticky
+    - content.code.copy
+    - content.tabs.link
+
+  icon:
+    repo: fontawesome/brands/github
+
+  # Fonts are self-hosted via stylesheets/fonts/fonts.css
+  font: false
+
+  # Default assets (the header stays dark in both schemes, so one glyph serves both)
+  favicon: assets/favicon.svg
+  logo: assets/glyph_phase_dark.png
+
+  # The toggle icon shows the current mode, matching the project website
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: lucide/moon
+        name: Switch to light mode
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: lucide/sun
+        name: Switch to dark mode
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/layout.css
+  - stylesheets/footnotes.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - markdown_include.include:
+      base_path: docs
+  - pymdownx.extra
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.superfences
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  generator: false
+  social:
+    - icon: material/web
+      link: https://proteus-framework.org/
+      name: PROTEUS website
+    - icon: material/email
+      link: mailto:dev@proteus-framework.org
+      name: Mail PROTEUS developers
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/fwl-abassi/
+      name: ABASSI on PyPI
+    - icon: fontawesome/brands/github
+      link: https://github.com/FormingWorlds/ABASSI
+      name: ABASSI on GitHub
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/header-links.js
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          inventories:
+            - https://docs.python.org/3/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+            - https://docs.scipy.org/doc/scipy/objects.inv
+          options:
+            docstring_style: numpy
+            docstring_options:
+              ignore_init_summary: yes
+            docstring_section_style: table
+            show_submodules: no
+            show_source: true
+            show_symbol_type_heading: true
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_docstring_attributes: true
+            show_root_full_path: false
+            members_order: alphabetical
+            merge_init_into_class: yes
+            filters: ["!^_"]
+
+use_directory_urls: false
+
+watch:
+  - src/
+  - docs/
+  - README.md
+  - CODE_OF_CONDUCT.md
