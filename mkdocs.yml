@@ -5,7 +5,9 @@ repo_url: https://github.com/FormingWorlds/ABASSI
 copyright: '© 2023-2026 <a href="https://formingworlds.space">Forming Worlds Lab</a>'
 
 nav:
-  - Home: index.md
+  - Home:
+      - About: index.md
+      - Getting started: getting_started.md
 
   - Community:
       - Contact: Community/contact.md
@@ -20,7 +22,6 @@ theme:
   custom_dir: docs/overrides
   features:
     - navigation.tabs
-    - navigation.indexes
     - navigation.footer
     - navigation.tabs.sticky
     - content.code.copy
