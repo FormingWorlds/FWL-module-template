@@ -1,6 +1,9 @@
 # ABASSI
 
-ABASSI is a volatile delivery and planetary accretion model designed for integration into
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Docs](https://img.shields.io/github/actions/workflow/status/FormingWorlds/ABASSI/docs.yaml?branch=main&label=Docs)](https://proteus-framework.org/ABASSI/)
+
+**ABASSI** is a volatile delivery and planetary accretion model designed for integration into
 PROTEUS. Named after the [Ibibio god of creation](https://en.wikipedia.org/wiki/Abassi_(spirit)).
 
 !!! info "PROTEUS framework"
