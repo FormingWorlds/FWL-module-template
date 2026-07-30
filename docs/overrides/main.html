@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <!-- EXTRAHEAD OVERRIDE LOADED -->
+
+  <link rel="icon" type="image/png"
+        href="{{ 'assets/favicon-light.png' | url }}"
+        media="(prefers-color-scheme: light)" />
+
+  <link rel="icon" type="image/png"
+        href="{{ 'assets/favicon.png' | url }}"
+        media="(prefers-color-scheme: dark)" />
+
+  <script>
+  (function () {
+    function setFavicon(href) {
+      document.querySelectorAll(
+      'link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]'
+      ).forEach(el => el.remove());
+
+      const link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      link.href = href;
+      document.head.appendChild(link);
+
+      const link2 = document.createElement('link');
+      link2.rel = 'shortcut icon';
+      link2.type = 'image/png';
+      link2.href = href;
+      document.head.appendChild(link2);
+      }
+
+
+    const light = "{{ 'assets/favicon-light.png' | url }}";
+    const dark  = "{{ 'assets/favicon.png' | url }}";
+
+    const mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+    function apply() {
+      // cache-bust to defeat Safari favicon cache
+      const v = Date.now();
+      setFavicon((mql && mql.matches ? dark : light) + '?v=' + v);
+    }
+
+    apply();
+    if (mql) {
+      if (mql.addEventListener) mql.addEventListener('change', apply);
+      else if (mql.addListener) mql.addListener(apply);
+    }
+  })();
+  </script>
+
+  <script>
+  // The served markup always carries the first palette listed in mkdocs.yml, so a
+  // reader whose setting is the other one sees the wrong palette until the theme
+  // resolves it. Resolving it here, and stamping it on the body the moment the
+  // body exists, means the first paint is already right. A scheme the reader chose
+  // by hand wins over the setting, read through the theme's own storage getter.
+  (function () {
+    var scheme = null;
+    try {
+      // The theme scopes its storage keys by path, so read through its own
+      // getter rather than guessing the key.
+      var stored = typeof __md_get === "function" ? __md_get("__palette") : null;
+      if (stored && stored.color && stored.color.media !== "(prefers-color-scheme)") {
+        scheme = stored.color.scheme;
+      }
+    } catch (e) { /* storage unavailable or unparseable; fall back to the setting */ }
+    if (!scheme) {
+      scheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "slate"
+        : "default";
+    }
+    if (document.body) {
+      document.body.setAttribute("data-md-color-scheme", scheme);
+      return;
+    }
+    new MutationObserver(function (records, observer) {
+      if (document.body) {
+        document.body.setAttribute("data-md-color-scheme", scheme);
+        observer.disconnect();
+      }
+    }).observe(document.documentElement, { childList: true });
+  })();
+  </script>
+{% endblock %}
